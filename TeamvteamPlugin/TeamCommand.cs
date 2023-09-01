@@ -3,32 +3,44 @@ using Rocket.API;
 using Rocket.Unturned.Chat;
 using Rocket.Unturned.Player;
 using SDG.Unturned;
+using Steamworks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MainPlugin
+namespace TeamvteamPlugin
 {
+  
 
- 
     public class TeamCommand : IRocketCommand
     { 
-        public AllowedCaller AllowedCaller => AllowedCaller.Player; // Dont let the console call the command, only the player.
+        public AllowedCaller AllowedCaller => AllowedCaller.Player; 
 
-        public string Name => "team";  // Setting the name of the command as "ammo".
+        public string Name => "team";  
 
-        public string Help => "Choose a team"; // When /help ammo, this shall print.
+        public string Help => "Choose a team"; 
 
-        public string Syntax => "/team 1 or /team 2"; // <> is required and [] is optional
+        public string Syntax => "/team 1 or /team 2"; 
 
-        public List<string> Aliases { get; } = new List<string>() { "t" }; // By using { get; } you create a property of the list rather than creating a new list.
-        public List<string> Permissions { get; } = new List<string>() { "ac.ammo" }; // ac.ammo is the code/id of the permisson group allowed to use the /ammo command
+        public List<string> Aliases { get; } = new List<string>() { "t" }; 
+        public List<string> Permissions { get; } = new List<string>() { "tc.team" };
+        
 
-        public void Execute(IRocketPlayer caller, string[] command) // when /ammo is used, the following string is thrown to the player who used the command
+        public void Execute(IRocketPlayer caller, string[] command) 
         {
             if (caller is not UnturnedPlayer player) return;
+            
+            if (command.Length == 0 || !int.TryParse(command[0], out int id) || (id != 1 && id != 2))
+            {
+                UnturnedChat.Say(caller, "Not a vaid team");
+                return;
+
+            }
+            player.Player.quests.ServerAssignToGroup(new CSteamID((ulong)id), EPlayerGroupRank.MEMBER, true);
+            
+
         }
     }
     
