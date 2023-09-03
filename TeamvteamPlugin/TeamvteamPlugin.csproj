@@ -38,6 +38,10 @@
     <Reference Include="com.rlabrecque.steamworks.net">
       <HintPath>..\..\..\..\..\..\SteamCMD\steamapps\common\U3DS\Unturned_Data\Managed\com.rlabrecque.steamworks.net.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\SteamCMD\steamapps\common\U3DS\Unturned_Data\Managed\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Rocket.API">
       <HintPath>..\..\..\..\..\..\SteamCMD\steamapps\common\U3DS\Extras\Rocket.Unturned\Rocket.API.dll</HintPath>
     </Reference>
@@ -69,9 +73,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TeamCommand.cs" />
+    <Compile Include="Commands\LoadoutCommand.cs" />
+    <Compile Include="Commands\TeamCommand.cs" />
+    <Compile Include="Loadouts\LoadoutManager.cs" />
+    <Compile Include="Loadouts\Loadout.cs" />
     <Compile Include="MainPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

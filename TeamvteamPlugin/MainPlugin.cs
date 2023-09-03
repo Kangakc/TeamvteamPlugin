@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Steamworks;
-
+using TeamvteamPlugin.Loadouts;
 
 namespace TeamvteamPlugin
 {
@@ -16,6 +16,7 @@ namespace TeamvteamPlugin
         protected override void Load()
         {
             Level.onLevelLoaded += OnLevelLoaded;
+            LoadoutManager.read();
 
             Logger.Log("fortnitesyndrome");
             base.Load();
